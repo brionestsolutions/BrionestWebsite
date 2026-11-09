@@ -333,3 +333,7 @@ form input:focus,form select:focus,form textarea:focus{outline:1px solid var(--b
  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
  [data-reveal]{opacity:1;transform:none}
 }
+
+/* Inline required-field indicators stay beside their label text. */
+form label{display:block}
+form label>input,form label>select,form label>textarea{display:block;margin-top:9px}
