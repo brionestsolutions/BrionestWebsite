@@ -16,8 +16,10 @@
   <link rel="preconnect" href="https://images.unsplash.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="audience.css">
   <script defer src="config.js"></script>
   <script defer src="site.js"></script>
+  <script defer src="audience.js"></script>
   <title>BrioNest | Home Automation. Expertly Delivered.</title>
 </head>
 <body>
@@ -28,11 +30,11 @@
     <svg class="brand-icon" width="36" height="36" viewBox="0 0 42 42" aria-hidden="true" fill="none"><rect x="1" y="1" width="40" height="40" rx="12" stroke="currentColor" stroke-width="1.3"/><path d="M9 23 21 11l12 12M14 20v11h14V20M19 31v-7h5v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="11" r="3" fill="#dfad71"/></svg>
     <span>brio<span class="brand-soft">nest</span><b>.</b><small>INTELLIGENT SPACES</small></span>
   </a>
-  <nav class="desktop-nav" aria-label="Main navigation"><a href="#services">What we do</a><a href="#products">Products</a><a href="#process">Our approach</a><a href="#audiences">Who we serve</a><a href="#builderos">BuilderOS <span class="mini-new">SOON</span></a></nav>
+  <nav class="desktop-nav" aria-label="Main navigation"><a href="#services">What we do</a><a href="#products">Products</a><a href="#process">Our approach</a><a href="#audiences">Who we serve</a><a href="#pricing">Pricing</a><a href="#builderos">BuilderOS <span class="mini-new">SOON</span></a></nav>
   <a class="nav-cta" href="#contact">Let's discuss your project <span aria-hidden="true">↗</span></a>
   <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span></button>
 </header>
-<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden><a href="#services">What we do</a><a href="#products">Products</a><a href="#process">Our approach</a><a href="#audiences">Who we serve</a><a href="#builderos">BuilderOS · Coming soon</a><a href="#contact">Let's discuss your project ↗</a></nav>
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden><a href="#services">What we do</a><a href="#products">Products</a><a href="#process">Our approach</a><a href="#audiences">Who we serve</a><a href="#pricing">Pricing & packages</a><a href="#builderos">BuilderOS · Coming soon</a><a href="#contact">Let's discuss your project ↗</a></nav>
 
 <main id="main">
   <section class="hero" aria-labelledby="hero-title">
@@ -149,8 +151,88 @@
       <div class="section-kicker" data-reveal><span>05 / WHO WE HELP</span><span class="kicker-line"></span><span>THE RIGHT SOLUTION FOR YOUR SPACE</span></div>
       <h2 class="audience-title" data-reveal>Different spaces.<br><em>One reliable partner.</em></h2>
       <div class="audience-grid">
-        <article class="audience-card homeowner" data-reveal><div class="audience-top"><span>FOR HOMEOWNERS</span><span>01 / 02</span></div><div class="audience-bottom"><h3>A smarter home,<br>without the complexity.</h3><p>From one room to a fully integrated residence. Get guidance on what you actually need, professionally installed and explained.</p><a href="#contact" data-audience="homeowner">Plan my home <span aria-hidden="true">↗</span></a></div></article>
-        <article class="audience-card developer" data-reveal><div class="audience-top"><span>FOR BUILDERS & DEVELOPERS</span><span>02 / 02</span></div><div class="audience-bottom"><h3>Smart-ready projects.<br>Thoughtful execution.</h3><p>Automation consultation, specification, deployment coordination and post-handover planning for your residential projects.</p><a href="#contact" data-audience="builder">Discuss a project <span aria-hidden="true">↗</span></a></div></article>
+        <article class="audience-card homeowner" data-reveal><div class="audience-top"><span>FOR HOMEOWNERS</span><span>01 / 02</span></div><div class="audience-bottom"><h3>A smarter home,<br>without the complexity.</h3><p>From one room to a fully integrated residence. Get guidance on what you actually need, professionally installed and explained.</p><a href="#pricing" data-plan-jump="homeowner">Explore home packages <span aria-hidden="true">↗</span></a></div></article>
+        <article class="audience-card developer" data-reveal><div class="audience-top"><span>FOR BUILDERS & DEVELOPERS</span><span>02 / 02</span></div><div class="audience-bottom"><h3>Smart-ready projects.<br>Thoughtful execution.</h3><p>Automation consultation, specification, deployment coordination and post-handover planning for your residential projects.</p><a href="#pricing" data-plan-jump="builder">Explore builder packages <span aria-hidden="true">↗</span></a></div></article>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="packages-section" id="pricing" aria-labelledby="packages-title">
+    <div class="shell">
+      <div class="packages-top" data-reveal>
+        <div class="section-kicker"><span>06 / PACKAGES & PRICING</span><span class="kicker-line"></span><span>OPTIONS FOR EVERY SCALE</span></div>
+        <div class="packages-heading-row">
+          <div><h2 id="packages-title">A smarter choice.<br><em>For every kind of space.</em></h2><p>Explore the original BrioNest packages, now presented with a clear view of what's included. We'll help you select, customize and professionally deploy the right solution.</p></div>
+          <div class="packages-toggle" role="tablist" aria-label="Select pricing for homeowners or builders">
+            <button type="button" id="tab-homeowner" role="tab" aria-controls="panel-homeowner" aria-selected="true" tabindex="0" data-price-tab="homeowner"><span class="toggle-icon" aria-hidden="true">⌂</span> For homeowners</button>
+            <button type="button" id="tab-builder" role="tab" aria-controls="panel-builder" aria-selected="false" tabindex="-1" data-price-tab="builder"><span class="toggle-icon" aria-hidden="true">▥</span> For builders</button>
+          </div>
+        </div>
+      </div>
+      <div class="pricing-audience" id="panel-homeowner" role="tabpanel" aria-labelledby="tab-homeowner" data-price-panel="homeowner">
+        <div class="audience-insight">
+          <div><span class="insight-label">FOR HOMEOWNERS / THE POSSIBILITIES</span><h3>Make your home smarter, safer<br>and easier to live in.</h3></div>
+          <p>Manage lights and appliances from your phone, automate everyday routines, and add safety monitoring. Choose a few essentials or design a connected experience throughout your home.</p>
+        </div>
+        <div class="usecase-grid">
+          <article class="usecase-card"><span class="usecase-no">01 / EVERYDAY CONVENIENCE</span><h4>Living room & kitchen</h4><p>Control lights remotely, schedule appliances, and bring elegant touch controls into your interiors.</p><span class="usecase-meta">App control · Scheduling · Smart switches</span></article>
+          <article class="usecase-card"><span class="usecase-no">02 / EFFORTLESS COMFORT</span><h4>Bedroom & bathroom</h4><p>Automate your morning routine—like switching on the geyser, adjusting the fan, or scheduling lights.</p><span class="usecase-meta">Timed routines · Fan control · Smart sockets</span></article>
+          <article class="usecase-card"><span class="usecase-no">03 / PEACE OF MIND</span><h4>Whole-home control</h4><p>Check devices while travelling, plan festive lighting, and add motion alerts or security integrations.</p><span class="usecase-meta">Remote access · Sensors · Security</span></article>
+        </div>
+        <div class="package-list-head"><div><span class="insight-label">HOMEOWNER PACKAGES</span><h3>Choose your starting point.</h3></div><p>Indicative one-time package prices carried over from the original BrioNest site.</p></div>
+        <div class="pricing-cards">
+          <article class="price-card">
+            <div class="price-card-head"><span class="package-index">01 / ESSENTIALS</span><h4>Basic Smart</h4><p>For getting started with everyday smart control.</p><div class="package-cost"><strong>₹20,000</strong><span>Indicative package price</span></div></div>
+            <ul class="price-features"><li>5 smart switches</li><li>2 smart plugs</li><li>Mobile app control</li><li>Alexa & Google support</li><li>Basic automation</li><li>Installation included</li><li>1 year support</li></ul>
+            <a class="package-cta" href="#contact" data-plan-cta data-plan-name="Basic Smart" data-plan-audience="homeowner">Discuss Basic Smart <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="price-card highlighted">
+            <div class="price-card-head"><div class="popular-flag">FEATURED ORIGINAL PACKAGE</div><span class="package-index">02 / ENERGY & AUTOMATION</span><h4>Smart Energy</h4><p>For a more connected, energy-conscious home.</p><div class="package-cost"><strong>₹45,000</strong><span>Indicative package price</span></div></div>
+            <ul class="price-features"><li>10 smart switches</li><li>4 smart plugs</li><li>3 motion sensors</li><li>Energy monitoring dashboard</li><li>Advanced scheduling</li><li>Gas leak detector</li><li>Installation & setup included</li><li>1 year priority support</li></ul>
+            <a class="package-cta" href="#contact" data-plan-cta data-plan-name="Smart Energy" data-plan-audience="homeowner">Discuss Smart Energy <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="price-card">
+            <div class="price-card-head"><span class="package-index">03 / COMPLETE LIVING</span><h4>Whole Home</h4><p>For integrated controls, comfort and security.</p><div class="package-cost"><strong>₹80,000</strong><span>Indicative package price</span></div></div>
+            <ul class="price-features"><li>Home-wide smart switches*</li><li>8 smart plugs & 5 motion sensors</li><li>2 security cameras</li><li>Smart door lock & video doorbell</li><li>Central smart hub</li><li>Gas & smoke detectors</li><li>Complete automation</li><li>Installation & training included</li><li>2 years premium support</li></ul>
+            <a class="package-cta" href="#contact" data-plan-cta data-plan-name="Whole Home" data-plan-audience="homeowner">Discuss Whole Home <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+        <p class="pricing-fineprint">*The earlier website described Whole Home switches as “unlimited”; actual switch count and hardware specifications must be confirmed in the written quotation. Prices and features are indicative, may have changed, and depend on site assessment, compatible devices, installation conditions and confirmed service terms. These are not instant checkout offers.</p>
+      </div>
+      <div class="pricing-audience" id="panel-builder" role="tabpanel" aria-labelledby="tab-builder" data-price-panel="builder" hidden>
+        <div class="audience-insight">
+          <div><span class="insight-label">FOR DEVELOPERS / THE OPPORTUNITY</span><h3>Deliver smart-ready homes.<br>Differentiate every project.</h3></div>
+          <p>We support your team from planning and smart-ready infrastructure to unit-level installation, buyer demonstrations and handover. Create a stronger offering without building an in-house automation team.</p>
+        </div>
+        <div class="usecase-grid">
+          <article class="usecase-card"><span class="usecase-no">01 / BETTER POSITIONING</span><h4>Stand apart</h4><p>Offer modern home automation as a tangible buyer benefit, from essential smart-ready units to premium residences.</p><span class="usecase-meta">Project differentiation · Buyer value</span></article>
+          <article class="usecase-card"><span class="usecase-no">02 / PROJECT INTEGRATION</span><h4>Planned from day one</h4><p>Coordinate wiring provisions, devices, technology requirements and commissioning around construction milestones.</p><span class="usecase-meta">Planning · Specification · Installation</span></article>
+          <article class="usecase-card"><span class="usecase-no">03 / BUYER HANDOVER</span><h4>One accountable partner</h4><p>Support product demonstrations, homeowner training, activation and ongoing technical assistance.</p><span class="usecase-meta">Demo · Onboarding · Support</span></article>
+        </div>
+        <div class="package-list-head"><div><span class="insight-label">DEVELOPER INTEGRATION PACKAGES</span><h3>Scale to suit your project.</h3></div><p>Per-unit and project-specific quotations, with scope determined by development requirements.</p></div>
+        <div class="pricing-cards">
+          <article class="price-card">
+            <div class="price-card-head"><span class="package-index">01 / FOUNDATION</span><h4>Smart Ready</h4><p>Basic smart-home provisions integrated during construction.</p><div class="package-cost quote-cost"><strong>Per unit</strong><span>Project-based pricing</span></div></div>
+            <ul class="price-features"><li>Smart wiring preparation</li><li>App-controlled light switches</li><li>Mobile-controlled fan regulators</li><li>Voice-assistant readiness</li><li>Basic automation setup</li><li>Buyer demonstration & training</li><li>Coordinated delivery with your team</li></ul>
+            <a class="package-cta" href="#contact" data-plan-cta data-plan-name="Smart Ready" data-plan-audience="builder">Request unit pricing <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="price-card highlighted">
+            <div class="price-card-head"><div class="popular-flag">FEATURED ORIGINAL PACKAGE</div><span class="package-index">02 / DIFFERENTIATION</span><h4>Smart Premium</h4><p>Advanced features for a stronger project proposition.</p><div class="package-cost quote-cost"><strong>Custom quote</strong><span>Based on project scope</span></div></div>
+            <ul class="price-features"><li>Everything in Smart Ready</li><li>Motion sensors & automation</li><li>Energy monitoring</li><li>Gas leak detection</li><li>Advanced scheduling</li><li>Builder-branded app options*</li><li>Buyer consultation service</li><li>Complete project support</li></ul>
+            <a class="package-cta" href="#contact" data-plan-cta data-plan-name="Smart Premium" data-plan-audience="builder">Request project quote <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="price-card">
+            <div class="price-card-head"><span class="package-index">03 / SIGNATURE</span><h4>Smart Luxury</h4><p>Whole-home automation for high-end developments.</p><div class="package-cost quote-cost"><strong>Custom quote</strong><span>Based on project scope</span></div></div>
+            <ul class="price-features"><li>Everything in Smart Premium</li><li>Security-camera integrations</li><li>Smart door locks & video doorbells</li><li>Whole-home automation</li><li>Community integration options</li><li>Dedicated project management</li><li>Premium buyer handover</li><li>Extended technical support options*</li></ul>
+            <a class="package-cta" href="#contact" data-plan-cta data-plan-name="Smart Luxury" data-plan-audience="builder">Discuss Smart Luxury <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+        <p class="pricing-fineprint">Builder quotations depend on unit counts, project stage, site conditions, hardware selection and integration requirements. *App branding, community-level functionality and support coverage require feasibility and service-agreement confirmation. No pricing or measurable sales uplift is guaranteed.</p>
+      </div>
+      <div class="package-bottom-cta">
+        <div><span>PERSONALIZED, NOT ONE-SIZE-FITS-ALL.</span><h3>Need a custom configuration?</h3><p>Book a free initial consultation. We'll discuss your requirements, demonstrate suitable products and prepare an itemized recommendation.</p></div>
+        <a href="#contact" class="button button-warm" data-custom-package>Plan my solution <span aria-hidden="true">↗</span></a>
       </div>
     </div>
   </section>
@@ -194,7 +276,7 @@
   </section>
 </main>
 <footer class="footer"><div class="shell">
-  <div class="footer-top"><div><a href="#top" class="footer-logo">brio<span>nest</span><b>.</b></a><p>Smart products. Thoughtful integration. Lasting support.</p></div><div class="footer-list"><span>EXPLORE</span><a href="#services">Services</a><a href="#products">Products</a><a href="#process">Our process</a></div><div class="footer-list"><span>MORE</span><a href="#audiences">Homeowners & builders</a><a href="#builderos">BuilderOS · Coming soon</a><a href="#contact">Contact us</a></div></div>
+  <div class="footer-top"><div><a href="#top" class="footer-logo">brio<span>nest</span><b>.</b></a><p>Smart products. Thoughtful integration. Lasting support.</p></div><div class="footer-list"><span>EXPLORE</span><a href="#services">Services</a><a href="#products">Products</a><a href="#process">Our process</a><a href="#pricing">Packages & pricing</a></div><div class="footer-list"><span>MORE</span><a href="#audiences">Homeowners & builders</a><a href="#builderos">BuilderOS · Coming soon</a><a href="#contact">Contact us</a><a href="tel:+919833574794">+91 98335 74794</a><a href="mailto:info@brionest.com">info@brionest.com</a></div></div>
   <div class="footer-bottom"><span>© <span id="year">2026</span> BrioNest Solutions. All rights reserved.</span><span>INTELLIGENCE, DELIVERED.</span><a href="#top">Back to top ↑</a></div>
 </div></footer>
 </body>
