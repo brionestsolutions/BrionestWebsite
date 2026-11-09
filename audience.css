@@ -104,3 +104,6 @@
 @media(prefers-reduced-motion:reduce){
  .usecase-card,.price-card{transition:none}
 }
+
+.selected-package-hint{display:block;padding:13px 15px;background:#e4eee3;border-left:3px solid #397452;color:#21443a;font-size:12px;font-weight:700;margin:18px 0 0!important;line-height:1.5}
+.selected-package-hint[hidden]{display:none!important}
