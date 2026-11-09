@@ -30,6 +30,9 @@ try {
     await page.locator('[data-scene="away"]').click();
     assert.equal(await page.locator('#scene-title').textContent(),'Peace of mind');
     await page.locator('[data-scene="home"]').click();
+    await page.locator('.builderos-link').click();
+    assert.equal(await page.locator('[name="customerType"]').inputValue(), 'builder');
+    assert.equal(await page.locator('[name="interest"]').inputValue(), 'BuilderOS enquiry');
     if (width < 1091) {
       await page.locator('.menu-toggle').click();
       assert.equal(await page.locator('.menu-toggle').getAttribute('aria-expanded'),'true');
