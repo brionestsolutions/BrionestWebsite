@@ -80,10 +80,11 @@
 
   const customerType = document.querySelector('[name="customerType"]');
   const interestField = document.querySelector('[name="interest"]');
-  document.querySelectorAll('[data-audience]').forEach(link => {
+  document.querySelectorAll('[data-audience], [data-interest]').forEach(link => {
     link.addEventListener('click', () => {
-      customerType.value = link.dataset.audience;
-      if (link.dataset.audience === 'builder') interestField.value = 'Builder project automation';
+      if (link.dataset.audience) customerType.value = link.dataset.audience;
+      if (link.dataset.interest) interestField.value = link.dataset.interest;
+      else if (link.dataset.audience === 'builder') interestField.value = 'Builder project automation';
       else interestField.value = 'Home automation consultation';
     });
   });
