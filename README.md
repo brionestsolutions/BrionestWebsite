@@ -17,6 +17,32 @@ The homepage deliberately distinguishes BrioNest from a generic smart-gadget sho
 
 No unverified years in business, client testimonials, project counts, certifications, brand authorisations, or fake project photographs.
 
+## Original BrioNest content restored (homeowners + builders)
+
+The homepage includes a dedicated **Packages & Pricing** section with keyboard-accessible audience tabs and detailed packages from the supplied original BrioNest source code. This brings back the original site's customer/builder segmentation while retaining the more service-focused V3 branding, consultation, installation/integration, and after-sales story.
+
+**Homeowners:**
+
+| Package | Indicative one-time price | Core inclusion |
+|---|---|---|
+| Basic Smart | ₹20,000 | 5 smart switches, 2 smart plugs, app and voice control, installation, 1-year support |
+| Smart Energy | ₹45,000 | 10 switches, 4 plugs, 3 motion sensors, energy monitoring, gas detector, setup, priority support |
+| Whole Home | ₹80,000 | Whole-home smart controls, plugs, motion sensing, cameras, lock, doorbell, hub, detectors, training and support |
+
+**Builders/developers:**
+
+| Package | Price basis | Core inclusion |
+|---|---|---|
+| Smart Ready | Per-unit pricing | Smart wiring provisions, switches, fan regulators, voice readiness, buyer demo and training |
+| Smart Premium | Custom quote | Smart Ready plus motion sensing, energy management, gas detection, scheduling, optional branding and project support |
+| Smart Luxury | Custom quote | Smart Premium plus integrated security, doors/doorbells, whole-home/community options, project management and extended support |
+
+The site also incorporates the original use-case ideas: homeowners' living room/kitchen convenience, bedroom/bathroom routines, remote whole-home control, and developers' market differentiation, site coordination and buyer handover.
+
+**Commercial caution:** Pricing and inclusions were reproduced from the user's earlier BrioNest website code and may be outdated; all pricing is prominently labelled *indicative*. The original "unlimited switches", app branding, community integration and long-term support assertions are softened or explicitly subject to written scope and feasibility. Do not publish unsubstantiated case studies, savings statistics, developer-client claims, performance guarantees or measured business outcomes.
+
+Buttons in each package select the correct audience, put the tier in the enquiry, and navigate to the form. The tier is stored inside the existing \`message\` field so the original Google Sheets schema remains unchanged. Direct links from the home/builder cards select the relevant pricing tab.
+
 ## Art direction
 
 Engineering confidence + warm, approachable premium service.
