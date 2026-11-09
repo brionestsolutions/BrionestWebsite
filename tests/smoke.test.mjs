@@ -6,7 +6,7 @@ const js = readFileSync('site.js', 'utf8');
 const workflow = readFileSync('.github/workflows/deploy.yml', 'utf8');
 for (const id of [
   'main', 'services', 'products', 'process', 'experience', 'audiences',
-  'builderos', 'contact', 'consultation-form', 'scene-title', 'form-feedback'
+  'pricing', 'tab-homeowner', 'tab-builder', 'panel-homeowner', 'panel-builder', 'builderos', 'contact', 'consultation-form', 'scene-title', 'form-feedback'
 ]) assert.match(html, new RegExp('id="' + id + '"'), 'Missing section/control: ' + id);
 
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
@@ -27,6 +27,19 @@ for (const name of ['home', 'away', 'evening']) {
   assert.match(html, new RegExp('data-scene="' + name + '"'), 'Scene control missing: ' + name);
   assert.match(js, new RegExp('(?:^|\\s)' + name + ':\\s*\\{'), 'Scene model missing: ' + name);
 }
+const audienceCSS = readFileSync('audience.css', 'utf8');
+const audienceJS = readFileSync('audience.js', 'utf8');
+for (const tier of ['Basic Smart','Smart Energy','Whole Home','Smart Ready','Smart Premium','Smart Luxury']) {
+  assert.ok(html.includes(tier), 'Missing pricing tier: ' + tier);
+}
+for (const price of ['₹20,000','₹45,000','₹80,000','Per unit','Custom quote']) {
+  assert.ok(html.includes(price), 'Missing original price: ' + price);
+}
+assert.match(audienceJS, /data-price-tab/);
+assert.match(audienceJS, /data-plan-cta/);
+assert.match(js, /selectedPackage/, 'Original backend must receive selected plan');
+assert.match(audienceCSS, /@media\(max-width:560px\)/);
+assert.match(workflow, /audience\.css site\.js audience\.js/);
 assert.match(css, /@media\(max-width:560px\)/);
 assert.match(css, /@media\(max-width:820px\)/);
 assert.match(css, /prefers-reduced-motion:reduce/);
