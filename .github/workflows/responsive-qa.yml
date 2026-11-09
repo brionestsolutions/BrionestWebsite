@@ -1,0 +1,36 @@
+name: Responsive Browser QA
+on:
+  push:
+    branches: [main]
+    paths:
+      - index.html
+      - styles.css
+      - site.js
+      - config.js
+      - favicon.svg
+      - tests/browser-qa.mjs
+      - .github/workflows/responsive-qa.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  responsive:
+    name: Check mobile, tablet and desktop
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install browser test package
+        run: npm install --no-save --no-audit --no-fund playwright@1.56.1
+      - name: Responsive and interaction check
+        run: node tests/browser-qa.mjs
+      - name: Keep screenshots for design review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: brionest-responsive-screenshots
+          path: qa-screenshots/
+          retention-days: 7
+          if-no-files-found: ignore
