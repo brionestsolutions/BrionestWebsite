@@ -1,45 +1,71 @@
-# BrioNest · Living, beautifully in sync.
+# BrioNest · Home automation, expertly delivered
 
-Premium, mobile-first smart-living website built as a deliberately lightweight static application (HTML + modern CSS + vanilla JavaScript), ready for GitHub Pages.
+A premium, responsive, GitHub Pages website for BrioNest Solutions, representing the **actual business model**: home automation products, consultancy, system architecture and product selection, deployment, integration, commissioning, and ongoing management/support.
 
-## Design system (v2)
+## What the site communicates
 
-- **Direction:** understated architectural luxury meets contemporary intelligent living. Editorial layouts, deliberate asymmetry, real-room photography, precise typography and quiet motion.
-- **Colors:** porcelain \`#f6f5f1\` for warmth; slate \`#18222b\` for maturity and trust; cobalt \`#465bdc\` for deliberate calls to action and smart-system cues. No decorative gold.
-- **Typography:** Manrope for purposeful, confident headlines; Instrument Serif italic for emotional emphasis; DM Sans for readable supporting copy.
-- **Responsive:** desktop split hero and editorial grids; dedicated tablet and mobile layouts at 1230, 1050, 790 and 520px; no horizontal scrolling intended.
-- **Motion:** initial hero entrance, on-scroll section reveals, tactile hover states, interactive three-scene selector; respects \`prefers-reduced-motion\`.
-- **Story:** aspiration → philosophy → interactive experience → practical solutions → developer offer → approach → consultation.
-- **Accessibility:** semantic landmarks, keyboard navigation, visible focus, alt text, reduced-motion support, form validity and confirmation status.
+The homepage deliberately distinguishes BrioNest from a generic smart-gadget shop or interior design business:
 
-## Deploy with GitHub Actions
+1. **Value proposition:** "Intelligent spaces. Expertly delivered." — a systems-integration and deployment partner.
+2. **Services:** consultation/planning → product selection/system design → installation/integration → support/maintenance.
+3. **Product categories:** smart light controls/switches, sensors/cameras/security, hubs/controllers/infrastructure, plus sockets, fan regulators, locks, doorbells and automation scenes.
+4. **How delivery works:** discovery → design/specification → deployment/commissioning → management/improvement.
+5. **Interactive example:** non-connected demonstration of an "I'm home", "Away mode", or "Movie night" automation scene.
+6. **Customers:** dedicated messaging for homeowners and real-estate builders/developers.
+7. **BuilderOS:** separately positioned **upcoming** BuilderOS software vision; explicitly marked in development with a conceptual preview. Not marketed as a released product.
+8. **Consultation:** functional frontend using original API contract.
 
-1. In **Settings → Pages**, choose **Build and deployment → Source: GitHub Actions**.
-2. Push to \`main\`. The workflow \`.github/workflows/deploy.yml\` runs \`node tests/smoke.test.mjs\`, then deploys.
-3. Site address: https://brionestsolutions.github.io/BrionestWebsite/ (unless a custom domain is configured).
-4. If configuring a custom domain, set DNS and HTTPS separately in **Settings → Pages**.
+No unverified years in business, client testimonials, project counts, certifications, brand authorisations, or fake project photographs.
 
-No npm, bundler, or build service is required.
+## Art direction
 
-## Preserve the original consultation / Google Sheets workflow
+Engineering confidence + warm, approachable premium service.
 
-The form posts to the original FastAPI endpoint \`POST {BRIONEST_API_BASE_URL}/api/consultation\`. It submits the existing fields without changes:
+- **Deep pine** \`#142c2b\`: credibility, technical expertise, consistency and calm.
+- **Warm paper** \`#f7f5f0\`: approachability, openness, premium restraint.
+- **Warm brass** \`#dfad71\`: limited emphasis and high-visibility consultation action.
+- **Manrope** headings + **Instrument Serif** editorial emphasis + **DM Sans** body text.
+- **Product-relevant photographs:** wall-mounted smart switch, real control device, smart-home security camera and wired automation control panel. Residential backgrounds are used only to illustrate homeowner/developer contexts. Photography is licensed third-party illustrative imagery, not claimed to be BrioNest's work. Replace with verified BrioNest project images when available.
+- Mobile layouts at 1090 / 820 / 560px; reduced-motion support; keyboard-accessible navigation and scene controls; dynamic current year; meaningful alt text.
 
-\`name\`, \`email\`, \`phone\`, \`customerType\`, \`propertyType\`, \`preferredDate\`, \`message\`.
+## Deploy to GitHub Pages
 
-The values for customer type (\`homeowner\`, \`builder\`, \`referral\`) and property type match the original application.
+1. **Settings → Pages → Source → GitHub Actions**
+2. Push to \`main\`. Workflow: \`.github/workflows/deploy.yml\`.
+3. The workflow executes \`node tests/smoke.test.mjs\` and uploads a static site.
+4. Default URL: https://brionestsolutions.github.io/BrionestWebsite/
 
-1. Keep the original FastAPI backend and its Google Sheets service account deployed securely on an **HTTPS host**; GitHub Pages cannot run Python or securely store the Sheets credentials.
-2. Go to **Settings → Secrets and variables → Actions → Variables** and set \`BRIONEST_API_BASE_URL\` to the existing backend's public HTTPS origin. Do not include \`/api\` at the end.
-3. In the backend CORS settings, allow \`https://brionestsolutions.github.io\` and/or your production custom domain.
-4. Run the workflow again and submit a test enquiry. Confirm a row appears in the Google Sheet.
+There is no npm build dependency.
 
-**Important:** The legacy backend may reply with HTTP 200 despite a failed Google Sheets write. The frontend deliberately requires \`success === true\` and \`sheets_saved === true\` before showing confirmation. A server-side improvement would be to return a failure HTTP status on Sheets errors. The form must also have server-side spam/rate limiting before significant public traffic.
+## Original Google Sheets backend retained
 
-If \`BRIONEST_API_BASE_URL\` is missing, visitors receive a clear error instead of a false success message.
+The new frontend sends \`POST {BRIONEST_API_BASE_URL}/api/consultation\` with **exactly the original fields**:
 
-## Test / visual QA
+- \`name\`, \`email\`, \`phone\`, \`customerType\`, \`propertyType\`, \`preferredDate\`, \`message\`
 
-Run \`node tests/smoke.test.mjs\` for basic integrity checks. Before a public launch, manually check 320/375/768/1024/1440px, keyboard focus, contact form on real API, device-based image loading, and Safari/iOS behavior. The deployment smoke test is not a substitute for browser testing.
+The additional "What can we help you with?" choice is prefixed inside the original \`message\` field, so no backend-schema or Google Sheet column changes are needed.
 
-Interior photography is currently illustrative, served from Unsplash. Replace with approved BrioNest photography and check usage permissions, client/project consent, art direction and load performance before calling this the final production art direction. Do not mistake imagery for completed BrioNest customer installations.
+Configure repository **Settings → Secrets and variables → Actions → Variables → New repository variable** named \`BRIONEST_API_BASE_URL\`, set to the public HTTPS origin of your running original FastAPI backend. **Do not put /api at the end.**
+
+Set backend CORS allowed origins to include \`https://brionestsolutions.github.io\` and/or the production custom domain. The original backend has to be **separately hosted**: GitHub Pages cannot execute FastAPI, and credentials for Google Sheets must remain on the server.
+
+**Failure handling:** The legacy FastAPI handler can respond HTTP 200 even if Google Sheets saving fails. This frontend only displays a success message when both \`success === true\` and \`sheets_saved === true\`. The backend should return a suitable failure status on persistence failure and enforce rate limiting and spam protection.
+
+## QA & launch checklist
+
+- Run \`node tests/smoke.test.mjs\` (included in Actions).
+- Test on 320/375/768/1024/1440px across Chrome, Edge and Safari, including keyboard navigation and reduced-motion preferences.
+- Configure API URL, CORS, confirm actual successful Google Sheet row and failure behavior.
+- Replace illustrative imagery with BrioNest's real installations/products with rights and consent when available.
+- Verify product scope, service levels and support offerings with the business owner before public marketing claims.
+- If launching a custom domain, configure DNS and HTTPS in GitHub Pages settings.
+
+## Files
+
+- \`index.html\` — semantic sections and enquiry form
+- \`styles.css\` — visual system and responsive layouts
+- \`site.js\` — navigation, scene demo, animations and form submission
+- \`config.js\` — local fallback API config (Actions generates a deployed version from the repository variable)
+- \`favicon.svg\` — custom BrioNest mark
+- \`tests/smoke.test.mjs\` — structural and integration-contract smoke checks
+- \`.github/workflows/deploy.yml\` — automated GitHub Pages publishing
