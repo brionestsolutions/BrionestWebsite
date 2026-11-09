@@ -50,6 +50,10 @@ try {
     assert.ok(measures.body <= measures.vw + 2, name+' body horizontal overflow '+JSON.stringify(measures));
     assert.equal(measures.sections,8);
     assert.deepEqual(errors,[],name+' runtime errors');
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.waitForTimeout(220);
+    assert.equal(await page.locator('.site-header .brand').isVisible(), true, name+' header not visible');
+    await page.screenshot({path:'qa-screenshots/'+name+'-hero.png',fullPage:false,animations:'disabled'});
     await page.screenshot({path:'qa-screenshots/'+name+'.png',fullPage:true,animations:'disabled'});
     console.log(name,JSON.stringify(measures));
     await context.close();
