@@ -8,7 +8,7 @@ const mime = {'.html':'text/html','.css':'text/css','.js':'text/javascript','.sv
 const server = createServer((req,res)=>{
   const path = String(req.url || '/').split('?')[0];
   const name = path === '/' ? 'index.html' : path.replace(/^\/+/, '');
-  if (!['index.html','styles.css','site.js','config.js','favicon.svg'].includes(name) || !existsSync(name)) {
+  if (!['index.html','styles.css','audience.css','site.js','audience.js','config.js','favicon.svg'].includes(name) || !existsSync(name)) {
     res.writeHead(404); res.end('Not found'); return;
   }
   res.writeHead(200, {'Content-Type':mime[extname(name)] || 'text/plain','Cache-Control':'no-store'});
@@ -19,7 +19,7 @@ mkdirSync('qa-screenshots',{recursive:true});
 let browser;
 try {
   browser = await chromium.launch({headless:true});
-  for (const [name, width, height] of [['mobile',375,812],['tablet',768,1024],['desktop',1440,900]]) {
+  for (const [name, width, height] of [['small-mobile',320,740],['mobile',375,812],['tablet',768,1024],['laptop',1180,820],['desktop',1440,900]]) {
     const context = await browser.newContext({ viewport:{width,height}, deviceScaleFactor:1, reducedMotion:'reduce' });
     const page = await context.newPage();
     const errors = [];
@@ -30,6 +30,19 @@ try {
     await page.locator('[data-scene="away"]').click();
     assert.equal(await page.locator('#scene-title').textContent(),'Peace of mind');
     await page.locator('[data-scene="home"]').click();
+    // Verify the new pricing tabs and the original package enquiry pipeline.
+    await page.locator('#tab-builder').click();
+    assert.equal(await page.locator('#tab-builder').getAttribute('aria-selected'), 'true');
+    assert.equal(await page.locator('#panel-homeowner').isVisible(), false);
+    assert.equal(await page.locator('#panel-builder').isVisible(), true);
+    await page.locator('#panel-builder [data-plan-name="Smart Premium"]').click();
+    assert.equal(await page.locator('[name="customerType"]').inputValue(), 'builder');
+    assert.equal(await page.locator('#consultation-form').getAttribute('data-selected-package'), 'Smart Premium');
+    await page.locator('#tab-homeowner').click();
+    assert.equal(await page.locator('#panel-homeowner').isVisible(), true);
+    await page.locator('#panel-homeowner [data-plan-name="Smart Energy"]').click();
+    assert.equal(await page.locator('[name="customerType"]').inputValue(), 'homeowner');
+    assert.equal(await page.locator('#consultation-form').getAttribute('data-selected-package'), 'Smart Energy');
     await page.locator('.builderos-link').click();
     assert.equal(await page.locator('[name="customerType"]').inputValue(), 'builder');
     assert.equal(await page.locator('[name="interest"]').inputValue(), 'BuilderOS enquiry');
@@ -51,7 +64,7 @@ try {
     }));
     assert.ok(measures.doc <= measures.vw + 2, name+' horizontal overflow '+JSON.stringify(measures));
     assert.ok(measures.body <= measures.vw + 2, name+' body horizontal overflow '+JSON.stringify(measures));
-    assert.equal(measures.sections,8);
+    assert.equal(measures.sections,9);
     assert.deepEqual(errors,[],name+' runtime errors');
     await page.evaluate(() => window.scrollTo(0, 0));
     await page.waitForTimeout(220);
