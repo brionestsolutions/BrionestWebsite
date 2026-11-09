@@ -5,6 +5,8 @@ on:
     paths:
       - index.html
       - styles.css
+      - audience.css
+      - audience.js
       - site.js
       - config.js
       - favicon.svg
