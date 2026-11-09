@@ -109,7 +109,9 @@
     const data = Object.fromEntries(new FormData(form).entries());
     const interest = String(data.interest || 'General consultation').slice(0, 100);
     delete data.interest;
+    const selectedPackage = String(form.dataset.selectedPackage || '').slice(0, 90);
     data.message = 'Enquiry type: ' + interest +
+      (selectedPackage ? '\nSelected package: ' + selectedPackage : '') +
       (data.message ? '\n\n' + data.message : '');
 
     const defaultHTML = submit.innerHTML;
