@@ -21,13 +21,13 @@ No unverified years in business, client testimonials, project counts, certificat
 
 The website header and footer use the **BrioNest blue/navy logo supplied by the business owner** (adapted as a vector asset in `brand-logo.svg`). The user-supplied logo takes precedence over the generic home icon previously used. Its icon geometry and navy/blue wordmark are kept consistent across responsive layouts.
 
-Customer/builder pricing and features are aligned with the supplied original frontend source, including ₹20,000 Basic Smart, ₹45,000 Smart Energy, ₹80,000 Whole Home, per-unit Smart Ready and custom-quote Smart Premium and Smart Luxury. The three featured products now use the original catalogue names: Smart Light Switch, Smart Fan Regulator and Smart Power Socket. Contact details from brionest.in are **+91 98335 74794** and **info@brionest.com**. The original free-consultation expectations (home assessment, customized plan, transparent pricing and demonstration) are reflected in the contact section.
+Customer/builder pricing and features are aligned with the supplied original frontend source, including ₹20,000 Basic Smart, ₹45,000 Smart Energy, ₹80,000 Whole Home, per-unit Smart Ready and custom-quote Smart Premium and Smart Luxury. The product catalogue now has four immediately visible groups: switching & power, sensors & safety, security & access, and hubs & automation. These include the original Smart Light Switch, Smart Fan Regulator and Smart Power Socket categories. Contact details from brionest.in are **+91 98335 74794** and **info@brionest.com**. The original free-consultation expectations (home assessment, customized plan, transparent pricing and demonstration) are reflected in the contact section.
 
 Builder/developer **home automation** service pages and prices remain. Unreleased other platforms are intentionally excluded from public-facing branding, navigation and calls to action.
 
 ## Original BrioNest content restored (homeowners + builders)
 
-The homepage includes a dedicated **Packages & Pricing** section with keyboard-accessible audience tabs and detailed packages from the supplied original BrioNest source code. This brings back the original site's customer/builder segmentation while retaining the more service-focused V3 branding, consultation, installation/integration, and after-sales story.
+The homepage now has **two fully visible, separate pricing sections**: homeowner prices after the product catalogue, and developer packages after six project-service areas. This brings back the original site's customer/builder segmentation while retaining the more service-focused V3 branding, consultation, installation/integration, and after-sales story.
 
 **Homeowners:**
 
@@ -49,7 +49,20 @@ The site also incorporates the original use-case ideas: homeowners' living room/
 
 **Commercial caution:** Pricing and inclusions were reproduced from the user's earlier BrioNest website code and may be outdated; all pricing is prominently labelled *indicative*. The original "unlimited switches", app branding, community integration and long-term support assertions are softened or explicitly subject to written scope and feasibility. Do not publish unsubstantiated case studies, savings statistics, developer-client claims, performance guarantees or measured business outcomes.
 
-Buttons in each package select the correct audience, put the tier in the enquiry, and navigate to the form. The tier is stored inside the existing \`message\` field so the original Google Sheets schema remains unchanged. Direct links from the home/builder cards select the relevant pricing tab.
+Buttons in each package select the correct audience, put the tier in the enquiry, and navigate to the form. The tier is stored inside the existing \`message\` field so the original Google Sheets schema remains unchanged. Homeowner and builder navigation/quick-choice links go directly to their separate sections, rather than switching hidden tabs.
+
+## Current page structure and QA
+
+1. Hero → three-statement promise strip, stacked into three clean mobile rows.
+2. Immediate **My home** / **My development** audience choice.
+3. Overall BrioNest consulting, system design, deployment and maintenance.
+4. **Homeowners:** introduction → four product groups → Basic Smart, Smart Energy and Whole Home prices.
+5. **Builders:** introduction → six project delivery areas → Smart Ready, Smart Premium and Smart Luxury quotations.
+6. Process → interactive concept scene → consultation.
+
+The supplied blue/navy BrioNest logo artwork is preserved, but the header mark is sized to 150px desktop and 120px on small mobile. `segments.css` owns the new responsive segments, and `audience.js` passes the selected package to the existing consultation message without hidden tabs.
+
+The GitHub Actions browser suite verifies 320, 375, 768, 1180 and 1440px, navigation, layout overflow, small logo, mobile promise-strip order, audience products, developer services, separate prices, and an API **mock** checking the unchanged lead payload. Live Google Sheets delivery still requires backend verification.
 
 ## Art direction
 
@@ -98,6 +111,9 @@ Set backend CORS allowed origins to include \`https://brionestsolutions.github.i
 
 - \`index.html\` — semantic sections and enquiry form
 - \`styles.css\` — visual system and responsive layouts
+- \`audience.css\` — package pricing cards and styling
+- \`segments.css\` — 4 product groups, developer services, audience chapters, compact logo and trust strip
+- \`audience.js\` — package-to-contact selection without hidden tabs
 - \`site.js\` — navigation, scene demo, animations and form submission
 - \`config.js\` — local fallback API config (Actions generates a deployed version from the repository variable)
 - \`favicon.svg\` — custom BrioNest mark
