@@ -78,6 +78,52 @@
     sceneHero.style.backgroundColor = scene.color;
   }));
 
+
+  // Builder model-flat demonstration is an illustrative concept, not a live product UI.
+  const showflatOptions = {
+    ready: {
+      label: 'SMART-READY ESSENTIALS',
+      title: 'A memorable standard feature.',
+      description: 'Demonstrate app-based light control and modern switches in your sample flat. Voice-ready provisions can be planned where compatible.',
+      features: ['Smart switch demonstration', 'Mobile light control', 'Planned voice-ready provisions'],
+      appTitle: 'Welcome scene', kicker: 'LIGHTING CONTROL',
+      value: 'App-controlled lighting', note: 'Smart-ready essentials'
+    },
+    upgrade: {
+      label: 'OPTIONAL BUYER UPGRADE',
+      title: 'An easy next conversation.',
+      description: 'Interested buyers can discuss richer scenes, sensors, safety and access devices as a separate, tailored quotation.',
+      features: ['Multi-device automation scenes', 'Optional safety and motion sensing', 'Compatible smart access options'],
+      appTitle: 'Enhanced living', kicker: 'ADDITIONAL FEATURES',
+      value: 'Scenes + optional sensors', note: 'Optional buyer upgrades'
+    }
+  };
+  const showcaseButtons = [...document.querySelectorAll('[data-showflat]')];
+  const showflatStage = document.querySelector('.showflat-stage');
+  showcaseButtons.forEach(button => button.addEventListener('click', () => {
+    const offer = showflatOptions[button.dataset.showflat];
+    if (!offer) return;
+    showcaseButtons.forEach(item => {
+      const active = item === button;
+      item.classList.toggle('active', active);
+      item.setAttribute('aria-pressed', String(active));
+    });
+    const textMap = {
+      'showflat-label': offer.label, 'showflat-name': offer.title,
+      'showflat-description': offer.description, 'showflat-app-title': offer.appTitle,
+      'showflat-app-kicker': offer.kicker, 'showflat-app-value': offer.value,
+      'showflat-app-note': offer.note
+    };
+    for (const [id, value] of Object.entries(textMap)) document.getElementById(id).textContent = value;
+    const list = document.getElementById('showflat-features');
+    list.replaceChildren(...offer.features.map(value => {
+      const li = document.createElement('li');
+      li.textContent = value;
+      return li;
+    }));
+    showflatStage.classList.toggle('showflat-upgrade', button.dataset.showflat === 'upgrade');
+  }));
+
   const customerType = document.querySelector('[name="customerType"]');
   const interestField = document.querySelector('[name="interest"]');
   document.querySelectorAll('[data-audience], [data-interest]').forEach(link => {
@@ -110,8 +156,17 @@
     const interest = String(data.interest || 'General consultation').slice(0, 100);
     delete data.interest;
     const selectedPackage = String(form.dataset.selectedPackage || '').slice(0, 90);
+    const detailLabels = {
+      homeStage: 'Home stage', homeFocus: 'Home priority',
+      builderStage: 'Project stage', approxUnits: 'Approximate units'
+    };
+    const journeyDetails = Object.entries(detailLabels)
+      .filter(([key]) => String(data[key] || '').trim() !== '')
+      .map(([key, label]) => label + ': ' + String(data[key]).slice(0, 120));
+    for (const key of Object.keys(detailLabels)) delete data[key];
     data.message = 'Enquiry type: ' + interest +
       (selectedPackage ? '\nSelected package: ' + selectedPackage : '') +
+      (journeyDetails.length ? '\n' + journeyDetails.join('\n') : '') +
       (data.message ? '\n\n' + data.message : '');
 
     const defaultHTML = submit.innerHTML;
