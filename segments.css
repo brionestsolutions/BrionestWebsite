@@ -18,8 +18,8 @@
 .trust-band-inner .trust-star{display:inline-block;flex-shrink:0}
 @media(max-width:820px){
  .trust-band-inner{display:grid;grid-template-columns:1fr;gap:0;min-width:0;min-height:0!important;padding:6px 0}
- .trust-band-inner .trust-item{display:flex;align-items:center;justify-content:center;text-align:center;min-height:43px;padding:10px 6px;font-size:10px;letter-spacing:1.5px;line-height:1.45;white-space:normal}
- .trust-band-inner .trust-item+.trust-item{border-top:1px solid #d3d6cc}
+  .trust-band-inner .trust-item{display:flex!important;align-items:center;justify-content:center;text-align:center;min-height:43px;padding:10px 6px;font-size:10px;letter-spacing:1.5px;line-height:1.45;white-space:normal}
+ .trust-band-inner .trust-item:not(:first-child){border-top:1px solid #d3d6cc}
  .trust-band-inner .trust-star{display:none!important}
 }
 @media(max-width:560px){
