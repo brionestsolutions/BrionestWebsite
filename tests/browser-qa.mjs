@@ -8,7 +8,7 @@ const mime = {'.html':'text/html','.css':'text/css','.js':'text/javascript','.sv
 const server = createServer((req,res)=>{
   const path = String(req.url || '/').split('?')[0];
   const name = path === '/' ? 'index.html' : path.replace(/^\/+/, '');
-  if (!['index.html','styles.css','audience.css','site.js','audience.js','config.js','favicon.svg'].includes(name) || !existsSync(name)) {
+  if (!['index.html','styles.css','audience.css','site.js','audience.js','config.js','favicon.svg','brand-logo.svg'].includes(name) || !existsSync(name)) {
     res.writeHead(404); res.end('Not found'); return;
   }
   res.writeHead(200, {'Content-Type':mime[extname(name)] || 'text/plain','Cache-Control':'no-store'});
@@ -69,6 +69,7 @@ try {
     await page.evaluate(() => window.scrollTo(0, 0));
     await page.waitForTimeout(220);
     assert.equal(await page.locator('.site-header .brand').isVisible(), true, name+' header not visible');
+    assert.equal(await page.locator('.site-header .brand img').evaluate(img => img.complete && img.naturalWidth > 0),true,name+' logo not loaded');
     await page.screenshot({path:'qa-screenshots/'+name+'-hero.png',fullPage:false,animations:'disabled'});
     await page.screenshot({path:'qa-screenshots/'+name+'.png',fullPage:true,animations:'disabled'});
     console.log(name,JSON.stringify(measures));
