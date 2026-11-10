@@ -8,7 +8,8 @@ const mime={'.html':'text/html','.css':'text/css','.js':'text/javascript','.svg'
 const allowed=['index.html','styles.css','audience.css','segments.css','conversion.css','site.js','audience.js','config.js','favicon.svg','brand-logo.svg'];
 const server=createServer((req,res)=>{
   const url=String(req.url||'/').split('?')[0];
-  const filename=url==='/'?'index.html':url.replace(/^\/+/,'');
+  const raw=url.replace(/^\/+/,'');
+  const filename=url==='/'?'index.html':(raw.endsWith('/')?raw+'index.html':raw);
   if (!allowed.includes(filename)||!existsSync(filename)){res.writeHead(404);res.end('Not found');return;}
   res.writeHead(200,{'Content-Type':mime[extname(filename)]||'text/plain','Cache-Control':'no-store'});
   res.end(readFileSync(filename));
@@ -126,6 +127,20 @@ try {
     assert.equal(await page.locator('.official-brand img').evaluate(i=>i.complete&&i.naturalWidth>0),true,'Brand logo failed loading');
     await page.screenshot({path:'qa-screenshots/'+name+'-hero.png',fullPage:false,animations:'disabled'});
     await page.screenshot({path:'qa-screenshots/'+name+'.png',fullPage:true,animations:'disabled'});
+    // Organic landing pages are standalone static routes.
+    for (const [slug,audience,headline] of [
+      ['home-automation/','homeowner','Your interiors are coming together'],
+      ['smart-ready-apartments/','builder','Give buyers one more reason']
+    ]) {
+      await page.goto('http://127.0.0.1:8127/'+slug, {waitUntil:'domcontentloaded'});
+      assert.ok((await page.locator('h1').innerText()).includes(headline), slug+' headline missing');
+      assert.equal(await page.locator('img[alt="BrioNest"]').count(),1);
+      const measure=await page.evaluate(()=>({vw:innerWidth,doc:document.documentElement.scrollWidth}));
+      assert.ok(measure.doc<=measure.vw+2,slug+' horizontal overflow at '+name+': '+JSON.stringify(measure));
+      await page.locator('.bottom-cta .btn').click();
+      await page.locator('#consultation-form').waitFor();
+      assert.equal(await page.locator('[name="customerType"]').inputValue(),audience,'Lead audience not preselected from '+slug);
+    }
     console.log(name,JSON.stringify({width,logoWidth,trustRows:trust.map(x=>Math.round(x.top)),images:measures.images,passes:true}));
     await context.close();
   }
