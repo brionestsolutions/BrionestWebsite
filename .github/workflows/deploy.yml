@@ -30,8 +30,8 @@ jobs:
           cp index.html styles.css audience.css segments.css conversion.css seo.css site.js audience.js favicon.svg brand-logo.svg dist/
           cp -R home-automation smart-ready-apartments dist/
           node scripts/build-seo.mjs
-          node tests/seo.test.mjs
           node -e "require('fs').writeFileSync('dist/config.js','window.BRIONEST_API_BASE_URL = '+JSON.stringify(process.env.API_BASE_URL||'')+';')"
+          node tests/seo.test.mjs
           touch dist/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:
