@@ -475,3 +475,21 @@ h2{font-weight:500;letter-spacing:-.071em}
   .footer-logo{font-size:clamp(26px,7vw,36px);gap:11px;letter-spacing:-1px}
   .footer-brand-icon{width:37px;height:37px}
 }
+
+
+/* Site facts and consultation guidance inherited from brionest.in */
+.product-note{font-size:11px;color:#637169;line-height:1.8;margin:20px 0 0}
+.expect-panel{max-width:510px;margin-top:32px;border:1px solid #779688;padding:24px 27px;background:rgba(255,255,255,.055)}
+.expect-panel strong{display:block;font:600 19px var(--display);letter-spacing:-.04em;color:#f1f5ee;margin-bottom:16px}
+.expect-panel ul{list-style:none;padding:0;margin:0;display:grid;gap:11px}
+.expect-panel li{position:relative;padding-left:24px;font-size:12px;color:#d6e6da;line-height:1.55}
+.expect-panel li::before{content:"✓";position:absolute;top:0;left:0;color:#dfad71;font-weight:800}
+.contact-direct{display:flex;flex-direction:column;gap:10px;margin-top:30px;align-items:flex-start}
+.contact-direct>span{color:#dfbe91;font-size:10px;font-weight:800;letter-spacing:1.5px;margin-bottom:4px}
+.contact-direct>a{font-size:16px;font-weight:600;color:white;border-bottom:1px solid transparent;padding-bottom:2px}
+.contact-direct>a:hover{border-bottom-color:#dfad71}
+@media(max-width:560px){
+  .expect-panel{padding:21px;margin-top:27px}
+  .contact-direct{margin-top:24px}
+  .contact-direct>a{font-size:15px}
+}
