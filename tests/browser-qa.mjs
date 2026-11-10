@@ -5,7 +5,7 @@ import { extname } from 'node:path';
 import assert from 'node:assert/strict';
 
 const mime={'.html':'text/html','.css':'text/css','.js':'text/javascript','.svg':'image/svg+xml'};
-const allowed=['index.html','styles.css','audience.css','segments.css','site.js','audience.js','config.js','favicon.svg','brand-logo.svg'];
+const allowed=['index.html','styles.css','audience.css','segments.css','conversion.css','site.js','audience.js','config.js','favicon.svg','brand-logo.svg'];
 const server=createServer((req,res)=>{
   const url=String(req.url||'/').split('?')[0];
   const filename=url==='/'?'index.html':url.replace(/^\/+/,'');
@@ -29,7 +29,7 @@ try {
     await page.goto('http://127.0.0.1:8127/',{waitUntil:'domcontentloaded',timeout:30000});
     await page.locator('.hero h1').waitFor();
     assert.match(await page.title(),/Home Automation/);
-    assert.equal(await page.locator('main section').count(),11,'Missing audience section');
+    assert.equal(await page.locator('main section').count(),13,'Missing audience section');
     assert.equal(await page.locator('.product-segment').count(),4,'Product groups');
     assert.equal(await page.locator('.builder-solution-card').count(),6,'Builder solution groups');
     assert.equal(await page.locator('.trust-item').count(),3,'Trust statements');
@@ -51,15 +51,20 @@ try {
       assert.ok(Math.abs(trust[0].top-trust[1].top)<3&&Math.abs(trust[1].top-trust[2].top)<3,name+' trust strip should be single row');
     }
 
+    assert.ok(await page.locator('#experience').evaluate(el=>el.compareDocumentPosition(document.getElementById('products'))&Node.DOCUMENT_POSITION_FOLLOWING), 'Home demo must precede product catalogue');
+    await page.locator('[data-showflat="upgrade"]').click();
+    assert.equal(await page.locator('#showflat-name').textContent(),'An easy next conversation.');
+    assert.equal(await page.locator('[data-showflat="upgrade"]').getAttribute('aria-pressed'),'true');
+    await page.locator('[data-showflat="ready"]').click();
+    assert.equal(await page.locator('#showflat-name').textContent(),'A memorable standard feature.');
     await page.locator('[data-scene="away"]').click();
     assert.equal(await page.locator('#scene-title').textContent(),'Peace of mind');
     await page.locator('[data-scene="home"]').click();
     await page.locator('#builder-pricing [data-plan-name="Smart Premium"]').click();
     assert.equal(await page.locator('[name="customerType"]').inputValue(),'builder');
+    assert.equal(await page.locator('#builder-details').isVisible(),true);
+    assert.equal(await page.locator('#homeowner-details').isVisible(),false);
     assert.equal(await page.locator('#consultation-form').getAttribute('data-selected-package'),'Smart Premium');
-    await page.locator('#pricing [data-plan-name="Smart Energy"]').click();
-    assert.equal(await page.locator('[name="customerType"]').inputValue(),'homeowner');
-    assert.equal(await page.locator('#consultation-form').getAttribute('data-selected-package'),'Smart Energy');
     if(width<1091){
       await page.locator('.menu-toggle').click();
       assert.equal(await page.locator('.menu-toggle').getAttribute('aria-expanded'),'true');
@@ -67,21 +72,44 @@ try {
       assert.equal(await page.locator('.menu-toggle').getAttribute('aria-expanded'),'false');
     }
 
-    // Mock only the external API, verifying the unchanged legacy Google Sheets schema.
-    let payload=null;
+    // Mock the external API to check the original Google Sheets schema for BOTH audiences.
+    const payloads=[];
     await page.route('https://test-api.example/api/consultation',async route=>{
-      payload=route.request().postDataJSON();
+      payloads.push(route.request().postDataJSON());
       await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,sheets_saved:true})});
     });
     await page.evaluate(()=>{window.BRIONEST_API_BASE_URL='https://test-api.example';});
-    await page.locator('[name="name"]').fill('Test Customer');
-    await page.locator('[name="email"]').fill('test@example.com');
+    await page.locator('[name="builderStage"]').selectOption('Construction / electrical stage');
+    await page.locator('[name="approxUnits"]').fill('120');
+    await page.locator('[name="name"]').fill('Test Developer');
+    await page.locator('[name="email"]').fill('builder@example.com');
     await page.locator('[name="phone"]').fill('+919876543210');
     await page.locator('#submit-button').click();
     await page.locator('#form-feedback.success').waitFor({timeout:7000});
-    assert.ok(payload&&payload.message.includes('Selected package: Smart Energy'),'Package lost in original lead payload');
-    assert.equal(payload.customerType,'homeowner');
-    assert.deepEqual(Object.keys(payload).sort(),['customerType','email','message','name','phone','preferredDate','propertyType'].sort());
+    assert.equal(payloads.length,1,'Builder enquiry not posted');
+    assert.equal(payloads[0].customerType,'builder');
+    assert.match(payloads[0].message,/Project stage: Construction \/ electrical stage/);
+    assert.match(payloads[0].message,/Approximate units: 120/);
+    assert.match(payloads[0].message,/Selected package: Smart Premium/);
+    assert.deepEqual(Object.keys(payloads[0]).sort(),['customerType','email','message','name','phone','preferredDate','propertyType'].sort());
+
+    await page.locator('#pricing [data-plan-name="Smart Energy"]').click();
+    assert.equal(await page.locator('[name="customerType"]').inputValue(),'homeowner');
+    assert.equal(await page.locator('#homeowner-details').isVisible(),true);
+    assert.equal(await page.locator('#builder-details').isVisible(),false);
+    await page.locator('[name="homeStage"]').selectOption('Interiors being planned');
+    await page.locator('[name="homeFocus"]').selectOption('Lighting and everyday convenience');
+    await page.locator('[name="name"]').fill('Test Homeowner');
+    await page.locator('[name="email"]').fill('home@example.com');
+    await page.locator('[name="phone"]').fill('+919876543210');
+    await page.locator('#submit-button').click();
+    await page.locator('#form-feedback.success').waitFor({timeout:7000});
+    assert.equal(payloads.length,2,'Homeowner enquiry not posted');
+    assert.equal(payloads[1].customerType,'homeowner');
+    assert.match(payloads[1].message,/Home stage: Interiors being planned/);
+    assert.match(payloads[1].message,/Home priority: Lighting and everyday convenience/);
+    assert.match(payloads[1].message,/Selected package: Smart Energy/);
+    assert.deepEqual(Object.keys(payloads[1]).sort(),['customerType','email','message','name','phone','preferredDate','propertyType'].sort());
     assert.equal(await page.locator('#consultation-form').getAttribute('data-selected-package'),null,'Package should reset');
 
     for(const section of await page.locator('main section').all())await section.scrollIntoViewIfNeeded();
@@ -105,4 +133,4 @@ try {
   if(browser)await browser.close();
   await new Promise(resolve=>server.close(resolve));
 }
-console.log('PASS BrioNest browser QA: 320–1440px, small logo, trust-strip rows, separate pricing, product groups, Builder services, original lead schema.');
+console.log('PASS: responsive conversion journeys, home-scene placement, builder showflat, audience-stage forms and unchanged lead payload.');
