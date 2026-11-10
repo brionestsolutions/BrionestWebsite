@@ -11,6 +11,7 @@ on:
       - seo.css
       - home-automation/**
       - smart-ready-apartments/**
+      - guides/**
       - scripts/build-seo.mjs
       - audience.js
       - site.js
