@@ -5,7 +5,7 @@ import { extname } from 'node:path';
 import assert from 'node:assert/strict';
 
 const mime={'.html':'text/html','.css':'text/css','.js':'text/javascript','.svg':'image/svg+xml'};
-const allowed=['index.html','styles.css','audience.css','segments.css','conversion.css','seo.css','site.js','audience.js','config.js','favicon.svg','brand-logo.svg','home-automation/index.html','smart-ready-apartments/index.html'];
+const allowed=['index.html','styles.css','audience.css','segments.css','conversion.css','seo.css','site.js','audience.js','config.js','favicon.svg','brand-logo.svg','home-automation/index.html','smart-ready-apartments/index.html','guides/home-automation-before-interiors/index.html'];
 const server=createServer((req,res)=>{
   const url=String(req.url||'/').split('?')[0];
   const raw=url.replace(/^\/+/,'');
@@ -130,7 +130,8 @@ try {
     // Organic landing pages are standalone static routes.
     for (const [slug,audience,headline] of [
       ['home-automation/','homeowner','Your interiors are coming together'],
-      ['smart-ready-apartments/','builder','Give buyers one more reason']
+      ['smart-ready-apartments/','builder','Give buyers one more reason'],
+      ['guides/home-automation-before-interiors/','homeowner','Plan the interiors.']
     ]) {
       await page.goto('http://127.0.0.1:8127/'+slug, {waitUntil:'domcontentloaded'});
       assert.ok((await page.locator('h1').innerText()).includes(headline), slug+' headline missing');
