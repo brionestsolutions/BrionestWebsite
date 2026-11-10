@@ -493,3 +493,9 @@ h2{font-weight:500;letter-spacing:-.071em}
   .contact-direct{margin-top:24px}
   .contact-direct>a{font-size:15px}
 }
+
+/* Keep the original company name legible inside the illustrative control UI. */
+.device-brand{font-size:clamp(13px,1.45vw,18px);letter-spacing:-.5px;white-space:nowrap}
+.device-top{gap:9px}
+.device-top>span:last-child{font-size:8px;letter-spacing:.7px;white-space:nowrap}
+@media(max-width:560px){.device-brand{font-size:13px;letter-spacing:-.4px}.device-top>span:last-child{font-size:7px;letter-spacing:.15px}}
