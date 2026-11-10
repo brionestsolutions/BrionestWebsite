@@ -499,3 +499,16 @@ h2{font-weight:500;letter-spacing:-.071em}
 .device-top{gap:9px}
 .device-top>span:last-child{font-size:8px;letter-spacing:.7px;white-space:nowrap}
 @media(max-width:560px){.device-brand{font-size:13px;letter-spacing:-.4px}.device-top>span:last-child{font-size:7px;letter-spacing:.15px}}
+
+
+/* Supplied BrioNest identity. Preserve icon proportions and blue/navy wordmark. */
+.official-brand{display:inline-flex;align-items:center;padding:0;min-width:0}
+.official-brand img{display:block;width:clamp(180px,17vw,235px);height:auto;aspect-ratio:820/284;object-fit:contain}
+.official-footer-logo{display:inline-flex;align-items:center;justify-content:flex-start;width:max-content;max-width:100%;padding:2px 20px 2px 0;background:#f7f5f0}
+.official-footer-logo img{display:block;width:clamp(195px,21vw,270px);height:auto;aspect-ratio:820/284;object-fit:contain}
+@media(max-width:1090px){.official-brand img{width:205px}}
+@media(max-width:560px){
+ .official-brand img{width:175px}
+ .official-footer-logo{padding-right:12px}
+ .official-footer-logo img{width:205px}
+}
