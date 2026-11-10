@@ -19,7 +19,7 @@ No unverified years in business, client testimonials, project counts, certificat
 
 ## Canonical logo and current-site alignment
 
-The live original site at **https://brionest.in/** uses a **gold Home outline icon + “BrioNest Solutions”** name in navy; the new site's header, footer and favicon follow that structure. The redesign intentionally does not invent another brand mark.
+The website header and footer use the **BrioNest blue/navy logo supplied by the business owner** (adapted as a vector asset in `brand-logo.svg`). The user-supplied logo takes precedence over the generic home icon previously used. Its icon geometry and navy/blue wordmark are kept consistent across responsive layouts.
 
 Customer/builder pricing and features are aligned with the supplied original frontend source, including ₹20,000 Basic Smart, ₹45,000 Smart Energy, ₹80,000 Whole Home, per-unit Smart Ready and custom-quote Smart Premium and Smart Luxury. The three featured products now use the original catalogue names: Smart Light Switch, Smart Fan Regulator and Smart Power Socket. Contact details from brionest.in are **+91 98335 74794** and **info@brionest.com**. The original free-consultation expectations (home assessment, customized plan, transparent pricing and demonstration) are reflected in the contact section.
 
