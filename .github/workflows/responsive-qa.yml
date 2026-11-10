@@ -6,6 +6,7 @@ on:
       - index.html
       - styles.css
       - audience.css
+      - segments.css
       - audience.js
       - site.js
       - config.js
