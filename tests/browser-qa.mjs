@@ -5,7 +5,7 @@ import { extname } from 'node:path';
 import assert from 'node:assert/strict';
 
 const mime={'.html':'text/html','.css':'text/css','.js':'text/javascript','.svg':'image/svg+xml'};
-const allowed=['index.html','styles.css','audience.css','segments.css','conversion.css','site.js','audience.js','config.js','favicon.svg','brand-logo.svg'];
+const allowed=['index.html','styles.css','audience.css','segments.css','conversion.css','seo.css','site.js','audience.js','config.js','favicon.svg','brand-logo.svg','home-automation/index.html','smart-ready-apartments/index.html'];
 const server=createServer((req,res)=>{
   const url=String(req.url||'/').split('?')[0];
   const raw=url.replace(/^\/+/,'');
