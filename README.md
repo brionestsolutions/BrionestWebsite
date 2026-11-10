@@ -51,18 +51,29 @@ The site also incorporates the original use-case ideas: homeowners' living room/
 
 Buttons in each package select the correct audience, put the tier in the enquiry, and navigate to the form. The tier is stored inside the existing \`message\` field so the original Google Sheets schema remains unchanged. Homeowner and builder navigation/quick-choice links go directly to their separate sections, rather than switching hidden tabs.
 
-## Current page structure and QA
+## Current website strategy and flow
 
-1. Hero → three-statement promise strip, stacked into three clean mobile rows.
-2. Immediate **My home** / **My development** audience choice.
-3. Overall BrioNest consulting, system design, deployment and maintenance.
-4. **Homeowners:** introduction → four product groups → Basic Smart, Smart Energy and Whole Home prices.
-5. **Builders:** introduction → six project delivery areas → Smart Ready, Smart Premium and Smart Luxury quotations.
-6. Process → interactive concept scene → consultation.
+BrioNest is presented as a **consulting, integration, installation and ongoing-support partner**, not a standalone gadget shop. The site supports two clearly visible audiences, with tailored reasons to request a consultation.
 
-The supplied blue/navy BrioNest logo artwork is preserved, but the header mark is sized to 150px desktop and 120px on small mobile. `segments.css` owns the new responsive segments, and `audience.js` passes the selected package to the existing consultation message without hidden tabs.
+**Shared:** a premium responsive hero with **For my new home** and **For my project** choices → service expertise → audience routes.
 
-The GitHub Actions browser suite verifies 320, 375, 768, 1180 and 1440px, navigation, layout overflow, small logo, mobile promise-strip order, audience products, developer services, separate prices, and an API **mock** checking the unchanged lead payload. Live Google Sheets delivery still requires backend verification.
+**Homeowners:** new-home and interior-planning positioning → why to coordinate during the electrical/interior stage → interactive everyday smart-home scenes → four product categories → indicative Basic Smart (₹20,000), Smart Energy (₹45,000), Whole Home (₹80,000) packages.
+
+**Builders/developers:** market differentiation and a simple smart-ready feature to demonstrate, **without any guaranteed sales results** → interactive model-flat concept comparing baseline controls and optional buyer upgrades → six project solution groups → per-unit/custom-quote builder packages → optional partnership conversations (no published/unconfirmed commission promise).
+
+**Shared close:** delivery methodology → consultation with a form that **adapts to the visitor** (home stage and desired features OR development stage and approximate units) → direct contact.
+
+- The supplied blue/navy logo remains intact, with a compact 150px desktop / 120px small-mobile header size.
+- `segments.css`: brand, mobile trust strip, homeowner and builder sections.
+- `conversion.css`: move-in timing, home-scene journey, builder model-flat concept, partner opportunity, audience form styling.
+- `site.js`: interactions and the existing backend API call.
+- `audience.js`: audience field visibility, package selection and enquiry hints.
+- All audience-dependent details are prefixed into the existing `message` key, keeping the original seven-field FastAPI / Sheets API request unchanged.
+- The builder exterior photograph is an **illustrative licensed Unsplash residential development image**, not a BrioNest installation or client project. Replace it with approved first-party project imagery when available.
+
+### QA
+
+GitHub Actions runs `node tests/smoke.test.mjs`, followed by GitHub Pages publishing. A separate browser workflow checks 320px, 375px, 768px, 1180px and 1440px, navigation, layout overflow, mobile promise-strip alignment, homeowner demo placement, builder model-flat controls, six original packages and mocked successful enquiries from both audiences. Live Google Sheets submission remains a separate integration step requiring a configured API base URL.
 
 ## Art direction
 
