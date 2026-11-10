@@ -5,17 +5,18 @@ const html = read('index.html');
 const css = read('styles.css');
 const segmentsCSS = read('segments.css');
 const audienceCSS = read('audience.css');
+const conversionCSS = read('conversion.css');
 const js = read('site.js');
 const audienceJS = read('audience.js');
 const workflow = read('.github/workflows/deploy.yml');
 
 for (const id of [
-  'main', 'services', 'homeowners', 'products', 'pricing', 'home-packages-content',
-  'builders', 'builder-solutions', 'builder-pricing', 'builder-packages-content',
-  'process', 'experience', 'contact', 'consultation-form', 'scene-title', 'form-feedback'
+  'main', 'services', 'homeowners', 'new-home-timing', 'experience', 'products', 'pricing', 'home-packages-content',
+  'builders', 'showflat', 'builder-solutions', 'builder-pricing', 'builder-packages-content',
+  'process', 'contact', 'homeowner-details', 'builder-details', 'showflat-name', 'consultation-form', 'scene-title', 'form-feedback'
 ]) assert.match(html, new RegExp('id="' + id + '"'), 'Missing section/control: ' + id);
 
-assert.equal([...html.matchAll(/<section\b/g)].length, 11, 'Unexpected homepage section count');
+assert.equal([...html.matchAll(/<section\b/g)].length, 13, 'Unexpected homepage section count');
 assert.doesNotMatch(html, /BuilderOS|builderos/i, 'Remove all upcoming-platform mentions');
 assert.match(html, /class="brand official-brand"[^>]*[\s\S]*?brand-logo\.svg/);
 assert.match(html, /official-footer-logo[^>]*[\s\S]*?brand-logo\.svg/);
@@ -51,6 +52,19 @@ assert.match(segmentsCSS, /@media\(max-width:560px\)/, 'Missing small mobile lay
 assert.match(segmentsCSS, /@media\(max-width:820px\)/, 'Missing mobile layout');
 assert.match(segmentsCSS, /prefers-reduced-motion:reduce/);
 assert.match(html, /segments\.css/);
+assert.match(html, /conversion\.css/);
+assert.match(conversionCSS, /@media\(max-width:560px\)/);
+assert.match(conversionCSS, /@media\(max-width:820px\)/);
+assert.ok(html.indexOf('id="experience"') < html.indexOf('id="products"'), 'Home scene demo belongs within homeowner journey');
+assert.ok(html.indexOf('id="showflat"') > html.indexOf('id="builders"'), 'Show flat must be part of builder journey');
+assert.ok(html.indexOf('id="showflat"') < html.indexOf('id="builder-solutions"'), 'Show flat precedes builder solutions');
+assert.match(html, /data-showflat="ready"/);
+assert.match(html, /data-showflat="upgrade"/);
+assert.match(js, /showflatOptions/);
+assert.match(audienceJS, /refreshAudience/);
+for (const field of ['homeStage','homeFocus','builderStage','approxUnits']) assert.match(html,new RegExp('name="'+field+'"'));
+for (const field of ['homeStage','homeFocus','builderStage','approxUnits']) assert.ok(js.includes(field), 'Missing lead-field folding: '+field);
+assert.doesNotMatch(html, /25% Faster|6% Higher|100% Competitive|₹3,000 – ₹5,000/, 'Unverified performance claims not permitted');
 assert.doesNotMatch(html, /data-price-tab|data-price-panel/, 'Pricing is now always visible');
 for (const plan of ['Basic Smart','Smart Energy','Whole Home','Smart Ready','Smart Premium','Smart Luxury']) {
   assert.ok(html.includes(plan), 'Missing package: ' + plan);
@@ -71,6 +85,7 @@ assert.match(js, /delete data\.interest/, 'Keep unchanged original API schema');
 assert.match(js, /data\.message\s*=/, 'Store interest in message');
 assert.match(workflow, /node tests\/smoke\.test\.mjs/);
 assert.match(workflow, /segments\.css/);
+assert.match(workflow, /conversion\.css/);
 assert.match(workflow, /actions\/deploy-pages@v4/);
 assert.match(workflow, /BRIONEST_API_BASE_URL/);
 assert.match(read('brand-logo.svg'), /BrioNest/);
