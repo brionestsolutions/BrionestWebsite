@@ -7,6 +7,7 @@ const pages = [
   ['index.html','', 'Home Automation'],
   ['home-automation/index.html','home-automation/','Home Automation for New Homes'],
   ['smart-ready-apartments/index.html','smart-ready-apartments/','Smart-Ready Apartments'],
+  ['guides/home-automation-before-interiors/index.html','guides/home-automation-before-interiors/','Home Automation During Interiors'],
 ];
 const sitemap=readFileSync(join(dist,'sitemap.xml'),'utf8');
 const robots=readFileSync(join(dist,'robots.txt'),'utf8');
