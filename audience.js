@@ -77,5 +77,11 @@
   // Support previous direct links, without restoring hidden pricing tabs.
   if (location.hash === '#pricing-builder') location.replace('#builder-pricing');
   if (location.hash === '#pricing-homeowner') location.replace('#pricing');
+  const audienceParam = new URLSearchParams(location.search).get('audience');
+  if (audienceParam === 'builder' || audienceParam === 'homeowner') {
+    audienceField.value = audienceParam;
+    interestField.value = audienceParam === 'builder'
+      ? 'Builder project automation' : 'Home automation consultation';
+  }
   refreshAudience();
 })();
