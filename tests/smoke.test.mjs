@@ -10,8 +10,8 @@ for (const id of [
 ]) assert.match(html, new RegExp('id="' + id + '"'), 'Missing section/control: ' + id);
 
 assert.doesNotMatch(html, /BuilderOS|builderos/i, 'Remove all upcoming-platform mentions');
-assert.match(html, /<span class="brand-name">BrioNest Solutions<\/span>/);
-assert.match(html, /footer-logo[^>]*[\s\S]*?BrioNest Solutions/);
+assert.match(html, /class="brand official-brand"[^>]*[\s\S]*?brand-logo\.svg/);
+assert.match(html, /official-footer-logo[^>]*[\s\S]*?brand-logo\.svg/);
 assert.match(html, /tel:\+919833574794/);
 assert.match(html, /mailto:info@brionest.com/);
 assert.match(html, /What to expect/);
@@ -56,4 +56,6 @@ assert.match(workflow, /node tests\/smoke\.test\.mjs/);
 assert.match(workflow, /actions\/deploy-pages@v4/);
 assert.match(workflow, /BRIONEST_API_BASE_URL/);
 assert.match(workflow, /favicon\.svg/);
+assert.match(workflow, /brand-logo\.svg/);
+assert.match(readFileSync('brand-logo.svg', 'utf8'), /BrioNest/);
 console.log('PASS BrioNest: business content, page anchors, product images, mobile breakpoints, scene demo, legacy API contract, Pages workflow.');
