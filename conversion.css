@@ -158,3 +158,18 @@
 @media(prefers-reduced-motion:reduce){
  .timing-card,.hero-second-cta,.showflat-button,.showflat-stage>img{transition:none}
 }
+
+/* Search-focused service pages: prominent internal pathways, without changing audience flows. */
+.seo-guides{background:#ebece5;padding:clamp(76px,7vw,115px) 0}
+.seo-guides h2{font:550 clamp(40px,4.2vw,68px)/1.19 var(--display);letter-spacing:-.065em;margin:33px 0 36px}
+.seo-guides h2 em{color:#a27952}
+.seo-guide-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.seo-guide-grid>a{background:#f8f8f3;padding:clamp(24px,3vw,44px);border:1px solid #d1d9cf;display:flex;flex-direction:column;gap:15px;min-height:260px;position:relative;transition:transform .25s,background .25s}
+.seo-guide-grid>a:nth-child(2){background:#e0e9df}
+.seo-guide-grid>a:hover{transform:translateY(-4px);background:white}
+.seo-guide-grid>a>span{font-size:10px;letter-spacing:1.4px;color:#966f4b;font-weight:800}
+.seo-guide-grid>a>strong{font:650 clamp(24px,2.25vw,36px)/1.22 var(--display);letter-spacing:-.055em;max-width:470px}
+.seo-guide-grid>a>small{font-size:13px;line-height:1.7;color:#657569;max-width:470px}
+.seo-guide-grid>a>b{font-size:23px;position:absolute;right:28px;bottom:27px;font-weight:400;color:#28664f}
+@media(max-width:560px){.seo-guide-grid{grid-template-columns:1fr}.seo-guide-grid>a{min-height:245px}.seo-guides h2{font-size:clamp(40px,9vw,55px)}}
+@media(prefers-reduced-motion:reduce){.seo-guide-grid>a{transition:none}}
