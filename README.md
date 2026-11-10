@@ -12,10 +12,18 @@ The homepage deliberately distinguishes BrioNest from a generic smart-gadget sho
 4. **How delivery works:** discovery → design/specification → deployment/commissioning → management/improvement.
 5. **Interactive example:** non-connected demonstration of an "I'm home", "Away mode", or "Movie night" automation scene.
 6. **Customers:** dedicated messaging for homeowners and real-estate builders/developers.
-7. **BuilderOS:** separately positioned **upcoming** BuilderOS software vision; explicitly marked in development with a conceptual preview. Not marketed as a released product.
-8. **Consultation:** functional frontend using original API contract.
+7. **Consultation:** functional frontend using original API contract.
 
 No unverified years in business, client testimonials, project counts, certifications, brand authorisations, or fake project photographs.
+
+
+## Canonical logo and current-site alignment
+
+The live original site at **https://brionest.in/** uses a **gold Home outline icon + “BrioNest Solutions”** name in navy; the new site's header, footer and favicon follow that structure. The redesign intentionally does not invent another brand mark.
+
+Customer/builder pricing and features are aligned with the supplied original frontend source, including ₹20,000 Basic Smart, ₹45,000 Smart Energy, ₹80,000 Whole Home, per-unit Smart Ready and custom-quote Smart Premium and Smart Luxury. The three featured products now use the original catalogue names: Smart Light Switch, Smart Fan Regulator and Smart Power Socket. Contact details from brionest.in are **+91 98335 74794** and **info@brionest.com**. The original free-consultation expectations (home assessment, customized plan, transparent pricing and demonstration) are reflected in the contact section.
+
+Builder/developer **home automation** service pages and prices remain. Unreleased other platforms are intentionally excluded from public-facing branding, navigation and calls to action.
 
 ## Original BrioNest content restored (homeowners + builders)
 
