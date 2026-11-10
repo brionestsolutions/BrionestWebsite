@@ -8,6 +8,10 @@ on:
       - audience.css
       - segments.css
       - conversion.css
+      - seo.css
+      - home-automation/**
+      - smart-ready-apartments/**
+      - scripts/build-seo.mjs
       - audience.js
       - site.js
       - config.js
