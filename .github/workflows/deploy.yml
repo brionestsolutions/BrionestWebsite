@@ -29,6 +29,7 @@ jobs:
           mkdir -p dist
           cp index.html styles.css audience.css segments.css conversion.css seo.css site.js audience.js favicon.svg brand-logo.svg dist/
           cp -R home-automation smart-ready-apartments dist/
+          cp -R guides dist/
           node scripts/build-seo.mjs
           node -e "require('fs').writeFileSync('dist/config.js','window.BRIONEST_API_BASE_URL = '+JSON.stringify(process.env.API_BASE_URL||'')+';')"
           node tests/seo.test.mjs
