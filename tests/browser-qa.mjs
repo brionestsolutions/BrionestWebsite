@@ -45,7 +45,7 @@ try {
     assert.equal(await page.locator('#consultation-form').getAttribute('data-selected-package'), 'Smart Energy');
     assert.equal(await page.locator('#builderos').count(), 0);
     assert.equal(await page.getByText('BuilderOS').count(), 0);
-    assert.equal(await page.locator('.brand-name').textContent(), 'BrioNest Solutions');
+    assert.equal(await page.locator('.official-brand img').getAttribute('alt'), 'BrioNest');
     if (width < 1091) {
       await page.locator('.menu-toggle').click();
       assert.equal(await page.locator('.menu-toggle').getAttribute('aria-expanded'),'true');
