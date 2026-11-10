@@ -43,9 +43,9 @@ try {
     await page.locator('#panel-homeowner [data-plan-name="Smart Energy"]').click();
     assert.equal(await page.locator('[name="customerType"]').inputValue(), 'homeowner');
     assert.equal(await page.locator('#consultation-form').getAttribute('data-selected-package'), 'Smart Energy');
-    await page.locator('.builderos-link').click();
-    assert.equal(await page.locator('[name="customerType"]').inputValue(), 'builder');
-    assert.equal(await page.locator('[name="interest"]').inputValue(), 'BuilderOS enquiry');
+    assert.equal(await page.locator('#builderos').count(), 0);
+    assert.equal(await page.getByText('BuilderOS').count(), 0);
+    assert.equal(await page.locator('.brand-name').textContent(), 'BrioNest Solutions');
     if (width < 1091) {
       await page.locator('.menu-toggle').click();
       assert.equal(await page.locator('.menu-toggle').getAttribute('aria-expanded'),'true');
@@ -64,7 +64,7 @@ try {
     }));
     assert.ok(measures.doc <= measures.vw + 2, name+' horizontal overflow '+JSON.stringify(measures));
     assert.ok(measures.body <= measures.vw + 2, name+' body horizontal overflow '+JSON.stringify(measures));
-    assert.equal(measures.sections,9);
+    assert.equal(measures.sections,8);
     assert.deepEqual(errors,[],name+' runtime errors');
     await page.evaluate(() => window.scrollTo(0, 0));
     await page.waitForTimeout(220);
