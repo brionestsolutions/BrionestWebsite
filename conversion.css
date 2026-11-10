@@ -173,3 +173,6 @@
 .seo-guide-grid>a>b{font-size:23px;position:absolute;right:28px;bottom:27px;font-weight:400;color:#28664f}
 @media(max-width:560px){.seo-guide-grid{grid-template-columns:1fr}.seo-guide-grid>a{min-height:245px}.seo-guides h2{font-size:clamp(40px,9vw,55px)}}
 @media(prefers-reduced-motion:reduce){.seo-guide-grid>a{transition:none}}
+
+.seo-guide-followup{margin:29px 0 0;font-size:13px;color:#49675a;line-height:1.75}
+.seo-guide-followup a{color:#214f3b;font-weight:800;text-decoration:underline;text-underline-offset:4px}
