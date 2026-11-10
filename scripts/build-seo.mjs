@@ -20,6 +20,8 @@ const pages = [
     desc: 'Plan smart switches, lighting, sensors and integrated home automation alongside your interiors. Explore professional products, installation and packages.'},
   {path: 'smart-ready-apartments/', file: 'smart-ready-apartments/index.html', type: 'Service', title: 'Smart-Ready Apartments for Builders & Developers | BrioNest',
     desc: 'BrioNest helps builders plan smart-ready apartments with unit-level automation, model-flat demonstrations, project integration and buyer handover.'},
+  {path: 'guides/home-automation-before-interiors/', file: 'guides/home-automation-before-interiors/index.html', type: 'WebPage', title: 'When to Plan Home Automation During Interiors | BrioNest',
+    desc: 'Moving into a new flat? Plan smart switches, wiring compatibility, app control and automation before interior and electrical work is finished.'},
 ];
 const orgId = new URL('#organization', base).href;
 for (const page of pages) {
