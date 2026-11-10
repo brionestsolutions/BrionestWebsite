@@ -6,9 +6,15 @@ const js = readFileSync('site.js', 'utf8');
 const workflow = readFileSync('.github/workflows/deploy.yml', 'utf8');
 for (const id of [
   'main', 'services', 'products', 'process', 'experience', 'audiences',
-  'pricing', 'tab-homeowner', 'tab-builder', 'panel-homeowner', 'panel-builder', 'builderos', 'contact', 'consultation-form', 'scene-title', 'form-feedback'
+  'pricing', 'tab-homeowner', 'tab-builder', 'panel-homeowner', 'panel-builder', 'contact', 'consultation-form', 'scene-title', 'form-feedback'
 ]) assert.match(html, new RegExp('id="' + id + '"'), 'Missing section/control: ' + id);
 
+assert.doesNotMatch(html, /BuilderOS|builderos/i, 'Remove all upcoming-platform mentions');
+assert.match(html, /<span class="brand-name">BrioNest Solutions<\/span>/);
+assert.match(html, /footer-logo[^>]*[\s\S]*?BrioNest Solutions/);
+assert.match(html, /tel:\+919833574794/);
+assert.match(html, /mailto:info@brionest.com/);
+assert.match(html, /What to expect/);
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
 assert.equal(new Set(ids).size, ids.length, 'Duplicate IDs');
 for (const link of html.matchAll(/\bhref="#([^"]+)"/g)) {
@@ -20,7 +26,7 @@ for (const match of html.matchAll(/<img\b[^>]*>/g)) {
 for (const field of ['name','email','phone','customerType','propertyType','preferredDate','message']) {
   assert.match(html, new RegExp('name="' + field + '"'), 'Missing original API field: ' + field);
 }
-for (const word of ['Consultancy','system design','Installation','support','BuilderOS','COMING SOON']) {
+for (const word of ['Consultancy','system design','Installation','support','Smart Light Switch','Smart Fan Regulator','Smart Power Socket']) {
   assert.ok(html.toLowerCase().includes(word.toLowerCase()), 'Missing core business positioning: ' + word);
 }
 for (const name of ['home', 'away', 'evening']) {
