@@ -26,7 +26,7 @@ jobs:
           API_BASE_URL: ${{ vars.BRIONEST_API_BASE_URL }}
         run: |
           mkdir -p dist
-          cp index.html styles.css audience.css segments.css site.js audience.js favicon.svg brand-logo.svg dist/
+          cp index.html styles.css audience.css segments.css conversion.css site.js audience.js favicon.svg brand-logo.svg dist/
           node -e "require('fs').writeFileSync('dist/config.js','window.BRIONEST_API_BASE_URL = '+JSON.stringify(process.env.API_BASE_URL||'')+';')"
           touch dist/.nojekyll
       - uses: actions/upload-pages-artifact@v3
